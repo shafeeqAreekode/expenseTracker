@@ -135,6 +135,7 @@ Catogary Type
             ElevatedButton.icon(
               onPressed: () {
                 addTransactions();
+                Navigator.of(context).pop();
               },
               icon: const Icon(Icons.add),
               label: const Text("Add New Transactions"),

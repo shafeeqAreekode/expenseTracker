@@ -5,8 +5,8 @@ import 'package:moneymanager/models/transaction/transaction_model.dart';
 const TRANSACTION_DB_NAME = "transaction-db";
 
 abstract class TransactionDbFunctions {
-  Future<void> addTransaction(TransactionModel obj);
   Future<List<TransactionModel>> getTransactions();
+  Future<void> addTransaction(TransactionModel obj);
 }
 
 class TransactionDb implements TransactionDbFunctions {
@@ -26,11 +26,10 @@ class TransactionDb implements TransactionDbFunctions {
   }
 
   Future<void> _refreshUi() async {
-    transactionListValueNotyfyer.value.clear();
     final _alltransactionList = await getTransactions();
-    await Future.forEach(_alltransactionList, (TransactionModel transaction) {
-      transactionListValueNotyfyer.value.add(transaction);
-    });
+    _alltransactionList.sort(((a, b) => a.date.compareTo(b.date)));
+    transactionListValueNotyfyer.value.clear();
+    transactionListValueNotyfyer.value.addAll(_alltransactionList);
 
     transactionListValueNotyfyer.notifyListeners();
   }

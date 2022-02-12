@@ -78,6 +78,9 @@ class ScreenTransactions extends StatelessWidget {
               return ListTile(
                 isThreeLine: true,
                 leading: CircleAvatar(
+                  backgroundColor: transaction.type == CatogaryType.income
+                      ? Color(0xCC039423)
+                      : Color(0xCCC00909),
                   radius: 50,
                   child: Text(transaction.amount.toInt().toString()),
                 ),
